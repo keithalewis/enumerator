@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="apply_.h" />
+    <ClInclude Include="array_.h" />
     <ClInclude Include="concatenate_.h" />
     <ClInclude Include="counted_enumerator_.h" />
     <ClInclude Include="enumerator.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="iota_.h" />
     <ClInclude Include="pair_.h" />
     <ClInclude Include="past.h" />
+    <ClInclude Include="range_.h" />
     <ClInclude Include="skip.h" />
     <ClInclude Include="until.h" />
     <ClInclude Include="upto.h" />

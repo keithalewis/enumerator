@@ -11,9 +11,12 @@ int main()
 	test_pair_();
 
 	test_past();
-	test_skip();
 	test_until();
 	test_upto();
+
+	test_range_();
+
+	test_skip();
 
 	return 0;
 }

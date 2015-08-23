@@ -1,25 +1,46 @@
 // apply_.h - apply a function to an enumerator
 #pragma once
 #include <type_traits>
+#include <iterator>
 
-namespace fms {
+namespace enumerator {
 
-	template<class F, class E,
-		class I = typename E::iterator_type,
-		class C = typename E::iterator_category,
-		class U = typename std::result_of<F(typename E::value_type)>::type
-	>
-	class apply_ : public enumerator_<I,C,U> {
+	template<class F, class E>
+	class apply_ : public std::iterator<
+		typename std::iterator_traits<E>::iterator_category,
+		typename std::result_of_t<F(typename std::iterator_traits<E>::value_type)>,
+		typename std::iterator_traits<E>::difference_type,
+		typename std::iterator_traits<E>::pointer,
+		typename std::iterator_traits<E>::reference>
+	{
 	protected:
 		F f;
+		E e;
 	public:
 		apply_(F f, E e)
-			: enumerator_<I,C,U>(e), f(f)
+			: e(e), f(f)
 		{ }
-
-		U operator*() const
+		operator bool() const
 		{
-			return f(enumerator_<I,C,U>::operator*());
+			return E::operator bool();
+		}
+		value_type operator*() const
+		{
+			return f(*e);
+		}
+		apply_& operator++()
+		{
+			++e;
+
+			return *this;
+		}
+		apply_ operator++(int)
+		{
+			apply_ a(*this);
+
+			++e;
+
+			return a;
 		}
 	};
 
@@ -29,17 +50,19 @@ namespace fms {
 		return apply_<F,E>(f,e);
 	}
 
-} // fms
+} // enumerator
 
 #ifdef _DEBUG
 #include <cassert>
-#include "enumerator_.h"
+#include <vector>
+#include "range_.h"
 
 inline void test_apply_()
 {
-	int i[] = {0,1,2};
-	auto e = fms::enumerator(i);
-	auto f = apply([](int i) { return i*i; }, e);
+	std::vector<int> i {0,1,2};
+	auto f = enumerator::apply([](int i) { return i*i; }, enumerator::range(i.begin(),i.end()));
+	auto f2(f);
+//	f = f2;
 	assert (*f == 0);
 	++f;
 	assert (*f++ == 1);

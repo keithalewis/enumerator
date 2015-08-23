@@ -2,56 +2,32 @@
 #pragma once
 #include <algorithm>
 #include <iterator>
-#include "enumerator_.h"
 
-namespace fms {
+namespace enumerator {
 
-	template<class I, class D = typename std::iterator_traits<I>::difference_type>
-	inline I skip(D n, I i)
+	template<class E, class D = typename std::iterator_traits<E>::difference_type>
+	inline E skip(D n, E e)
 	{
-		std::advance(i, n);
+		std::advance(e, n);
 
-		return i;
+		return e;
 	}
 	
-	template<class I, 
-		class C = typename std::iterator_traits<I>::iterator_category,
-		class T = typename std::iterator_traits<I>::value_type,
-		class D = typename std::iterator_traits<I>::difference_type,
-		class P = typename std::iterator_traits<I>::pointer, 
-		class R = typename std::iterator_traits<I>::reference> 
-	inline enumerator_<I,C,T,D,P,R> skip(D n, enumerator_<I,C,T,D,P,R> e)
-	{
-		return skip(n, e.iterator());
-	}
-
-
-} // namespace fms
+} // namespace enumerator
 
 #ifdef _DEBUG
 #include <cassert>
+#include <vector>
 
 inline void test_skip()
-{/*
-	using fms::enumerator;
-	using fms::skip;
+{
+	using enumerator::skip;
 
-	{
-		int i[] = {0,1,2};
-		auto j = skip(2, i);
-		assert (*j == 2);
-		j = skip(-1,j);
-		assert (*j == 1);
-	}
-	{
-		int i[] = {0,1,2};
-		auto e = enumerator(i);
-		assert (*e == 0);
-		e = skip(2,e);
-		assert (*e == 2);
-		e = skip(-1,e);
-		assert (*e == 1);
-	}*/
+	std::vector<int> v{0,1,2};
+	auto e1 = skip(1, v.begin());
+	assert (*e1 == 1);
+	e1 = skip(-1, e1);
+	assert (*e1 == 0);
 }
 
 #endif // _DEBUG

@@ -56,6 +56,12 @@
     <ClInclude Include="pair_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="range_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="array_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
