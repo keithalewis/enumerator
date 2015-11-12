@@ -45,7 +45,7 @@ namespace enumerator {
 	};
 
 	template<class F, class E>
-	inline auto apply(const F& f, E e)
+	inline auto apply(F f, E e)
 	{
 		return apply_<F,E>(f,e);
 	}
@@ -54,19 +54,21 @@ namespace enumerator {
 
 #ifdef _DEBUG
 #include <cassert>
-#include <vector>
-#include "range_.h"
 
 inline void test_apply_()
 {
-	std::vector<int> i {0,1,2};
-	auto f = enumerator::apply([](int i) { return i*i; }, enumerator::range(i.begin(),i.end()));
-	auto f2(f);
-//	f = f2;
-	assert (*f == 0);
-	++f;
-	assert (*f++ == 1);
-	assert (*f == 4);
+	using enumerator::apply;
+
+	int i[] = {0,1,2};
+	auto f = [](int i) { return sqrt(i); };
+	auto fi = apply(f, i);
+	auto fi2(fi);
+//	fi = fi2; // copying std::function?
+//	assert (fi);
+	assert (*fi == 0);
+	++fi;
+	assert (*fi++ == 1);
+	assert (*fi == sqrt(2));
 }
 
 #endif // _DEBUG

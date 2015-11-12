@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files\Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="enumerator.cpp">
@@ -20,50 +16,23 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="skip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="counted_enumerator_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="enumerator_.h">
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="apply_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="enumerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="until.h">
+    <ClInclude Include="until_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="iota_.h">
+    <ClInclude Include="copy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="past.h">
+    <ClInclude Include="null_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="upto.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="concatenate_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="apply_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="zip_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pair_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="range_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="array_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="README.md" />
   </ItemGroup>
 </Project>
