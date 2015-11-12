@@ -7,7 +7,7 @@ using namespace enumerator;
 void test_copy_until()
 {
 	char s[2];
-	copy(until([](const char* pc) { return *pc == 'c'; }, "abcd"), s);
+	copy(until([](auto pc) { return *pc == 'c'; }, "abcd"), s);
 	assert (0 == strncmp(s, "ab", 2));
 }
 
