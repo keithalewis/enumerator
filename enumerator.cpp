@@ -17,7 +17,9 @@ int main()
 	test_apply_();
 	test_until_();
 
+//	test_cmp();
 	test_copy();
+	test_swap();
 
 	test_copy_until();
 	/*

@@ -5,7 +5,9 @@
 #include "apply_.h"
 #include "until_.h"
 
+//#include "cmp.h"
 #include "copy.h"
+#include "swap.h"
 /*
 #include "counted_enumerator_.h"
 #include "iota_.h"

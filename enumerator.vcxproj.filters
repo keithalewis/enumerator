@@ -34,5 +34,11 @@
     <ClInclude Include="null_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="swap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="end_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -153,8 +153,10 @@
   <ItemGroup>
     <ClInclude Include="apply_.h" />
     <ClInclude Include="copy.h" />
+    <ClInclude Include="end_.h" />
     <ClInclude Include="enumerator.h" />
     <ClInclude Include="null_.h" />
+    <ClInclude Include="swap.h" />
     <ClInclude Include="until_.h" />
   </ItemGroup>
   <ItemGroup>
