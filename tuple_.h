@@ -16,6 +16,18 @@ namespace enumerator {
 		tuple_(I... i)
 			: i(i)
 		{ }
+		operator bool() const
+		{
+			return true;
+		}
 	};
 
 } // enumerator
+#ifdef _DEBUG
+#include <cassert>
+
+inline void test_tuple_()
+{
+}
+
+#endif // _DEBUG

@@ -40,5 +40,26 @@
     <ClInclude Include="end_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="iota_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="counted_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ptr_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enumerator_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tuple_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rotate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

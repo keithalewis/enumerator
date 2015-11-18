@@ -14,6 +14,9 @@ namespace enumerator {
 		P p;
 		E e;
 	public:
+		using value_type = typename std::iterator_traits<E>::value_type;
+		using reference = typename std::iterator_traits<E>::reference;
+
 		until_(P p, E e)
 			: p(p), e(e)
 		{ }

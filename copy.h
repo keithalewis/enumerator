@@ -3,17 +3,19 @@
 
 namespace enumerator {
 
-	template<class E0, class E1>
-	inline void copy(E0 e0, E1 e1)
+	template<class I, class J>
+	inline void copy(I i, J j)
 	{
-		while (e0 && e1)
-			*e1++ = *e0++;
+		while (i && j)
+			*j++ = *i++;
 	}
 
 } // enumerator
 
 #ifdef _DEBUG
 #include <cassert>
+#include <cstring>
+#include <vector>
 #include "null_.h"
 
 inline void test_copy()

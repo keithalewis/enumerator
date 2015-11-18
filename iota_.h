@@ -1,14 +1,17 @@
 // iota_.h - 0, 1, ...
 #pragma once
-#include "enumerator_.h"
+#include <iterator>
 
-namespace fms {
+namespace enumerator {
 
 	template<class T>
-	class iota_ : public enumerator_<void,T,std::input_iterator_tag,ptrdiff_t,T*,T&> {
+	class iota_ : public std::iterator<std::forward_iterator_tag, T> {
 		T t;
 	protected:
 	public:
+//		using value_type = typename std::iterator_traits<E>::value_type;
+//		using reference = typename std::iterator_traits<E>::reference;
+
 		iota_(const T& t = 0)
 			: t(t)
 		{ }
@@ -18,7 +21,11 @@ namespace fms {
 			return true;
 		}
 		// forward iterator
-		const T& operator*() const
+		T operator*() const
+		{
+			return t;
+		}
+		T& operator*()
 		{
 			return t;
 		}
@@ -38,7 +45,7 @@ namespace fms {
 		}
 	};
 
-	template<class T>
+	template<class T = int>
 	inline auto iota(const T& t = 0)
 	{
 		return iota_<T>(t);
@@ -52,10 +59,13 @@ namespace fms {
 inline void test_iota_()
 {
 	{
-		auto i = fms::iota<int>();
-		size_t n;
+		using enumerator::iota;
+
+		auto i = iota();
+		size_t n, ni;
 		n = sizeof(i);
-		n = sizeof(int);
+		ni = sizeof(int);
+		assert (n == ni);
 		assert (*i == 0);
 		assert (*++i == 1);
 	}

@@ -1,16 +1,20 @@
 // enumerator.h
 #pragma once
 
-#include "null_.h"
 #include "apply_.h"
+#include "counted_.h"
+#include "end_.h"
+#include "iota_.h"
+#include "null_.h"
+#include "ptr_.h"
+#include "rotate.h"
 #include "until_.h"
 
-//#include "cmp.h"
+#include "cmp.h"
 #include "copy.h"
 #include "swap.h"
 /*
 #include "counted_enumerator_.h"
-#include "iota_.h"
 #include "pair_.h"
 
 #include "past.h"

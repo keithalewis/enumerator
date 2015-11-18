@@ -1,6 +1,7 @@
 // swap.h - swap ranges
 #pragma once
 #include <algorithm>
+#include <type_traits>
 
 namespace enumerator {
 
@@ -10,40 +11,30 @@ namespace enumerator {
 		while (i && j)
 			std::iter_swap(i++, j++);
 
-		if (i)
-			return i;
-		else
-			return j;
+		return j;
 	}
 
 } // enumerator
 
 #ifdef _DEBUG
 #include <cassert>
+#include "copy.h"
+#include "counted_.h"
+#include "iota_.h"
 #include "null_.h"
+#include <string>
 
 inline void test_swap()
 {
-	using enumerator::swap;
-	using enumerator::null;
+	using namespace enumerator;
 
 	{
 		char i[4] = "abc";
 		char j[3] = "de";
 
-		auto k = swap(null(i), null(j));
-		assert (k);
-		assert (*k == 'c');
+		swap(null(i), null(j));
 		assert (0 == strncmp(i, "dec", 3));
 		assert (0 == strncmp(j, "ab", 2));
-	}
-	{
-		for (int n = 1; n < 5; ++n) {
-			char i[6] = "abcde";
-			auto j = swap(null(i), null(i+n));
-			assert (*j*0 == 0);
-//		assert (0 == strncmp(i, "bcdea", 3));
-		}
 	}
 }
 

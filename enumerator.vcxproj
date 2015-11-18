@@ -152,11 +152,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="apply_.h" />
+    <ClInclude Include="cmp.h" />
     <ClInclude Include="copy.h" />
+    <ClInclude Include="counted_.h" />
     <ClInclude Include="end_.h" />
     <ClInclude Include="enumerator.h" />
+    <ClInclude Include="enumerator_.h" />
+    <ClInclude Include="iota_.h" />
     <ClInclude Include="null_.h" />
+    <ClInclude Include="ptr_.h" />
+    <ClInclude Include="rotate.h" />
     <ClInclude Include="swap.h" />
+    <ClInclude Include="tuple_.h" />
     <ClInclude Include="until_.h" />
   </ItemGroup>
   <ItemGroup>

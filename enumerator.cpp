@@ -13,18 +13,22 @@ void test_copy_until()
 
 int main()
 {
-	test_null_();
 	test_apply_();
+	test_counted_();
+	test_end_();
+	test_iota_();
+	test_null_();
+	test_ptr_();
 	test_until_();
 
-//	test_cmp();
+	test_cmp();
 	test_copy();
+	test_rotate();
 	test_swap();
 
 	test_copy_until();
 	/*
 	test_counted_enumerator();
-	test_iota_();
 	test_pair_();
 
 	test_past();

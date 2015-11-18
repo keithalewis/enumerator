@@ -14,9 +14,22 @@ namespace enumerator {
 	{
 		E e;
 	public:
+		using value_type = typename std::iterator_traits<E>::value_type;
+		using reference = typename std::iterator_traits<E>::reference;
+
 		null_(E e)
 			: e(e)
 		{ }
+
+		bool operator==(const null_& n) const
+		{
+			return e == n.e;
+		}
+		bool operator!=(const null_& n) const
+		{
+			return !operator==(n);
+		}
+
 		operator bool() const
 		{
 			return *e != 0;
@@ -26,7 +39,7 @@ namespace enumerator {
 			return *e;
 		}
 		reference operator*()
-		{
+		{	
 			return *e;
 		}
 		null_& operator++()
