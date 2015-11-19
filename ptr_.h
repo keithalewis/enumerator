@@ -8,13 +8,12 @@ namespace enumerator {
 	struct ptr_ : public std::iterator<std::random_access_iterator_tag, T> {
 		T* p;
 	public:
-		/*
-		using iterator_category = typename std::iterator_traits<E>::iterator_category;
-		using value_type = typename std::iterator_traits<E>::value_type;
-		using difference_type = typename std::iterator_traits<E>::difference_type;
-		using pointer = typename std::iterator_traits<E>::pointer;
-		using reference = typename std::iterator_traits<E>::reference;
-		*/
+		using iterator_category = std::random_access_iterator_tag;
+		using value_type = T;
+		using difference_type = ptrdiff_t;
+		using pointer = typename T*;
+		using reference = typename T&;
+
 		ptr_(T* p)
 			: p(p)
 		{ }
