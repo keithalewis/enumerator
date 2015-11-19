@@ -109,5 +109,19 @@ inline void test_end_()
 		assert (i);
 		assert (!++i);
 	}
+	{
+		int s = 0;
+		for (const auto& i : v) {
+			s += i;
+		}
+		assert (s == 6);
+	}
+	{
+		int s = 0;
+		auto ev = enumerator::end(v);
+		while (ev)
+			s += *ev++;
+		assert (s == 6);
+	}
 }
 #endif // _DEBUG
