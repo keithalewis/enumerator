@@ -6,13 +6,11 @@ namespace enumerator {
 	template<class I, class J>
 	inline auto cmp(I i, J j)
 	{
-		while (i && j && *i == *j) {
-			++i;
-			++j;
-		}
+		while (i && j && *i++ == *j++)
+			;
 
 		return !i ? (!j ? 0 : -1) 
-			      :  !j ? 1 : *i - *j;
+			      : (!j ? 1 : *i - *j);
 	}
 
 } // enumerator

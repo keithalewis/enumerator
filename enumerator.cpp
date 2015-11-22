@@ -1,19 +1,21 @@
 // enumerator.cpp
 #include <cassert>
-#include "enumerator.h"
+#include "e.h"
+//#include "enumerator.h"
 
-using namespace enumerator;
-
+//using namespace enumerator;
+/*
 void test_copy_until()
 {
 	char s[2];
 	copy(until([](auto pc) { return *pc == 'c'; }, "abcd"), s);
 	assert (0 == strncmp(s, "ab", 2));
 }
-
+*/
 int main()
 {
-	test_apply_();
+	test_e();
+/*	test_apply_();
 	test_counted_();
 	test_end_();
 	test_iota_();
@@ -27,7 +29,6 @@ int main()
 	test_swap();
 
 	test_copy_until();
-	/*
 	test_counted_enumerator();
 	test_pair_();
 

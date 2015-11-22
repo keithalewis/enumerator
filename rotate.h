@@ -12,7 +12,7 @@ namespace enumerator {
 
 		E n = m;
 		while (b != n) {
-			std::swap(*b++, *n++);
+			std::iter_swap(b++, n++);
 			if (!n)
 				n = m;
 			else if (b == m)
