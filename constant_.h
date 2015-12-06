@@ -113,6 +113,7 @@ inline void test_constant_()
 
 		assert (i == i);
 		assert (!(i != i));
+
 	}
 }
 
