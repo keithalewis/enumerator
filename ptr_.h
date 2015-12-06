@@ -68,9 +68,7 @@ namespace enumerator {
 		}
 		ptr_& operator-=(difference_type n)
 		{
-			p -= n;
-
-			return *this;
+			return operator+=(-n);
 		}
 	};
 	template<class T>
@@ -82,23 +80,23 @@ namespace enumerator {
 template<class T>
 inline auto operator+(const enumerator::ptr_<T>& p, typename enumerator::ptr_<T>::difference_type n)
 {
-	ptr_<T> p_(p);
+	auto p_(p);
 
-	p_ += n;
+	p_.operator+=(n);
 
 	return p_;
 }
 template<class T>
 inline auto operator+(typename enumerator::ptr_<T>::difference_type n, const enumerator::ptr_<T>& p)
 {
-	return p + n;
+	return operator+(p, n);
 }
 template<class T>
 inline auto operator-(const enumerator::ptr_<T>& p, typename enumerator::ptr_<T>::difference_type n)
 {
-	ptr_<T> p_(p);
+	auto p_(p);
 
-	p_ -= n;
+	p_.operator-=(n);
 
 	return p_;
 }

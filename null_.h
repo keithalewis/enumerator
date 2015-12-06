@@ -16,11 +16,18 @@ namespace enumerator {
 		}
 		null_& operator++()
 		{
-			return static_cast<null_&>(I::operator++());
+			if (operator bool())
+				I::operator++();
+
+			return *this;
 		}
 		null_ operator++(int)
 		{
-			return null_(I::operator++(0));
+			null_ _null(*this);
+
+			operator++();
+
+			return _null;
 		}
 	};
 	template<class I>
@@ -28,6 +35,7 @@ namespace enumerator {
 	{
 		return null_<I>(i);
 	}
+	// shorthand
 	template<class I>
 	inline auto n(const I& i)
 	{
@@ -46,6 +54,7 @@ inline void test_null_()
 
 	{
 		char i[] = "foo";
+		assert (sizeof(i) == 4);
 		auto e = null(ptr(i));
 		auto e2(e);
 		e = e2;
@@ -56,6 +65,10 @@ inline void test_null_()
 		assert (*e == i[1]);
 		assert (*++e == i[2]);
 		assert (!++e);
+		assert (!e++);
+		++e;
+		e++;
+		assert (!e);
 	}
 	{
 		auto e = null(ptr("foo"));
@@ -68,6 +81,9 @@ inline void test_null_()
 		assert (*e == 'o');
 		assert (*++e == 'o');
 		assert (!++e);
+		++e;
+		e++;
+		assert (!e);
 	}
 }
 

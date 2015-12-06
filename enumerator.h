@@ -18,10 +18,10 @@ namespace enumerator {
 } // namespace enumerator
 
 #include "ptr_.h"
-#include "range_.h"
-#include "constant_.h"
-#include "counted_.h"
 #include "null_.h"
+#include "counted_.h"
+#include "constant_.h"
+#include "range_.h"
   /*
 #include "apply_.h"
 #include "counted_.h"
