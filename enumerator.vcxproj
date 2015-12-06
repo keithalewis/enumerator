@@ -22,6 +22,7 @@
     <ProjectGuid>{92D8D7A6-3C59-43EC-AD10-8A451E22DCA7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>enumerator</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -84,10 +85,11 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="apply_.h" />
     <ClInclude Include="cmp.h" />
+    <ClInclude Include="constant_.h" />
     <ClInclude Include="copy.h" />
     <ClInclude Include="counted_.h" />
     <ClInclude Include="e.h" />
@@ -161,8 +164,10 @@
     <ClInclude Include="iota_.h" />
     <ClInclude Include="null_.h" />
     <ClInclude Include="ptr_.h" />
+    <ClInclude Include="range_.h" />
     <ClInclude Include="rotate.h" />
     <ClInclude Include="swap.h" />
+    <ClInclude Include="timer.h" />
     <ClInclude Include="tuple_.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

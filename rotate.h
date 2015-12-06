@@ -26,8 +26,11 @@ namespace enumerator {
 #include <cassert>
 #include <cstring>
 #include <algorithm>
+#include <iostream>
+#include "timer.h"
 #include "copy.h"
 #include "counted_.h"
+#include "end_.h"
 #include "iota_.h"
 #include "null_.h"
 
@@ -47,6 +50,24 @@ inline void test_rotate()
 			assert (std::equal(s, s + 5, t));
 		}
 	}
+
+	std::vector<int> i(1'000'000);
+	auto r = [&i](size_t m) {
+		return [&i,m]() { 
+			std::rotate(i.begin(), i.begin() + m, i.end()); 
+		};
+	};
+	auto n = timer::time(r(1000), 1);
+	std::cout << n << std::endl;
+
+	auto ie = enumerator::end(i);
+	auto re = [&i](size_t m) {
+		return [&i,m]() { 
+			enumerator::rotate(i.begin(), i.begin() + m); 
+		};
+	};
+	n = timer::time(re(1000), 1);
+	std::cout << n << std::endl;
 }
 
 #endif // _DEBUG

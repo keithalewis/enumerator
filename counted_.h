@@ -3,67 +3,44 @@
 
 namespace enumerator {
 
-	template<class E>
-	class counted_ : public std::iterator<
-		typename std::iterator_traits<E>::iterator_category,
-		typename std::iterator_traits<E>::value_type,
-		typename std::iterator_traits<E>::difference_type,
-		typename std::iterator_traits<E>::pointer,
-		typename std::iterator_traits<E>::reference>
-	{
-		E e;
+	template<class I>
+	class counted_ : public I {
 		size_t n;
 	public:
-		using value_type = typename std::iterator_traits<E>::value_type;
-		using reference = typename std::iterator_traits<E>::reference;
-
-		counted_(E e, size_t n = 0)
-			: e(e), n(n)
+		counted_(const I& i, size_t n)
+			: I(i), n(n)
 		{ }
-
-		bool operator==(const counted_& c) const
+		bool operator==(const counted_& i) const
 		{
-			return n == c.n && e == c.e;
+			return n == i.n && I::operator==(i);
 		}
-		bool operator!=(const counted_& c) const
+		bool operator!=(const counted_& i) const
 		{
-			return !operator==(c);
+			return !operator==(i);
 		}
-
 		operator bool() const
 		{
 			return n != 0;
 		}
-		value_type operator*() const
-		{
-			return *e;
-		}
-		reference operator*()
-		{
-			return *e;
-		}
 		counted_& operator++()
 		{
-			++e;
-			--n;
-
-			return *this;
+			return --n, static_cast<counted_&>(I::operator++());
 		}
 		counted_ operator++(int)
 		{
-			counted_ _counted(*this);
-
-			operator++();
-
-			return _counted;
+			return counted_(I::operator++(0), n--);
 		}
-		// enable_if op--, op+=, ...
-
 	};
-	template<class E>
-	inline auto counted(E e, size_t n)
+	template<class I>
+	inline auto counted(const I& i, size_t n)
 	{
-		return counted_<E>(e, n);
+		return counted_<I>(i, n);
+	}
+
+	template<class T, size_t N>
+	inline auto array(T(&a)[N])
+	{
+		return counted(ptr_<T>(a), N);
 	}
 }
 
@@ -73,17 +50,21 @@ namespace enumerator {
 inline void test_counted_()
 {
 	using enumerator::counted;
+	using enumerator::array;
 
-	auto i = counted("abc", 2);
-	auto i2(i);
-	i = i2;
-	assert (i == i2);
-	assert (!(i != i2));
-	assert (i);
-	assert (*i == 'a');
-	assert (*++i == 'b');
-	i++;
-	assert (!i);
+	int i[] = {1,2,3};
+	auto e = array(i);
+	auto e2(e);
+	e = e2;
+	assert (e == e2);
+	assert (!(e != e2));
+	assert (e);
+	assert (*e == 1);
+	assert (*++e == 2);
+	assert (e != e2);
+	e++;
+	assert (*e++ == 3);
+	assert (!e);
 }
 
 #endif // _DEBUG

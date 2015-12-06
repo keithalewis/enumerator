@@ -4,77 +4,49 @@
 
 namespace enumerator {
 
-	template<class E>
-	class null_ : public std::iterator<
-		typename std::iterator_traits<E>::iterator_category,
-		typename std::iterator_traits<E>::value_type,
-		typename std::iterator_traits<E>::difference_type,
-		typename std::iterator_traits<E>::pointer,
-		typename std::iterator_traits<E>::reference>
-	{
-		E e;
-	public:
-		using value_type = typename std::iterator_traits<E>::value_type;
-		using reference = typename std::iterator_traits<E>::reference;
-
-		null_(E e)
-			: e(e)
+	template<class I>
+	struct null_ : public I {
+		null_(const I& i)
+			: I(i)
 		{ }
-
-		bool operator==(const null_& n) const
-		{
-			return e == n.e;
-		}
-		bool operator!=(const null_& n) const
-		{
-			return !operator==(n);
-		}
-
+		// operator==() ???
 		operator bool() const
 		{
-			return *e != 0;
-		}
-		value_type operator*() const
-		{
-			return *e;
-		}
-		reference operator*()
-		{	
-			return *e;
+			return I::operator*() != 0;
 		}
 		null_& operator++()
 		{
-			++e;
-
-			return *this;
+			return static_cast<null_&>(I::operator++());
 		}
 		null_ operator++(int)
 		{
-			auto _(*this);
-
-			operator++();
-
-			return _;
+			return null_(I::operator++(0));
 		}
 	};
-	template<class E>
-	inline auto null(E e)
+	template<class I>
+	inline auto null(const I& i)
 	{
-		return null_<E>(e);
+		return null_<I>(i);
+	}
+	template<class I>
+	inline auto n(const I& i)
+	{
+		return null(i);
 	}
 
 } // enumerator
 
 #ifdef _DEBUG
 #include <cassert>
+#include "ptr_.h"
 
 inline void test_null_()
 {
-	using enumerator::null;
+	using namespace enumerator;
 
 	{
 		char i[] = "foo";
-		auto e = null(i);
+		auto e = null(ptr(i));
 		auto e2(e);
 		e = e2;
 		assert (e);
@@ -86,7 +58,7 @@ inline void test_null_()
 		assert (!++e);
 	}
 	{
-		auto e = null("foo");
+		auto e = null(ptr("foo"));
 		auto e2(e);
 		e = e2;
 		assert (e);

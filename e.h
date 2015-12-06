@@ -4,10 +4,15 @@
 
 namespace e {
 
-#define ITERATOR(I) std::iterator< \
-	typename std::iterator_traits<I>::iterator_category, \
-	typename std::iterator_traits<I>::value_type>
-
+	template<class I>
+	using iterator = std::iterator< 
+		typename std::iterator_traits<I>::iterator_category,
+		typename std::iterator_traits<I>::value_type,
+		typename std::iterator_traits<I>::difference_type,
+		typename std::iterator_traits<I>::pointer,
+		typename std::iterator_traits<I>::reference
+	>;
+		
 	template<class T>
 	class ptr_ : public std::iterator<std::random_access_iterator_tag, T> {
 		T* p;
@@ -59,7 +64,7 @@ namespace e {
 
 	// enumerator from STL range
 	template<class I>
-	class range_ : public ITERATOR(I) {
+	class range_ : public iterator<I> {
 		I b;
 		I e;
 	public:
