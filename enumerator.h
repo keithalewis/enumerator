@@ -18,19 +18,19 @@ namespace enumerator {
 } // namespace enumerator
 
 #include "ptr_.h"
+#include "constant_.h"
 #include "null_.h"
 #include "counted_.h"
-#include "constant_.h"
 #include "range_.h"
-  /*
+
+#include "cmp.h"
+
+/*
 #include "apply_.h"
-#include "counted_.h"
-#include "end_.h"
 #include "iota_.h"
 x#include "rotate.h"
 #include "until_.h"
 
-#include "cmp.h"
 #include "copy.h"
 #include "swap.h"
 

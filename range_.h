@@ -12,6 +12,14 @@ namespace enumerator {
 		range_(const I& b, const I& e)
 			: b(b), e(e)
 		{ }
+		I begin() const
+		{
+			return b;
+		}
+		I end() const
+		{
+			return e;
+		}
 		operator bool() const
 		{
 			return b != e;
@@ -30,25 +38,30 @@ namespace enumerator {
 		}
 		range_& operator++()
 		{
-			++b;
+			if (b != e)
+				++b;
 
 			return *this;
 		}
 		range_ operator++(int)
 		{
-			auto _range = range_(*this);
+			range_ _range(*this);
 
 			operator++();
 
 			return _range;
 		}
-		I begin() const
+		range_& operator+=(difference_type n)
 		{
-			return b;
+			b += n;
+
+			return *this;
 		}
-		I end() const
+		range_& operator-=(difference_type n)
 		{
-			return e;
+			b -= n;
+
+			return *this;
 		}
 	};
 	template<class I>
@@ -63,7 +76,21 @@ namespace enumerator {
 	}
 
 } // enumerator
-
+template<class I>
+inline auto operator+(const enumerator::range_<I>& e, typename enumerator::range_<I>::difference_type n)
+{
+	return enumerator::range_<I>(e) += n;
+}
+template<class I>
+inline auto operator+(typename enumerator::range_<I>::difference_type n, const enumerator::range_<I>& e)
+{
+	return e + n;
+}
+template<class I>
+inline auto operator-(const enumerator::range_<I>& e, typename enumerator::range_<I>::difference_type n)
+{
+	return enumerator::range_<I>(e) -= n;
+}
 #ifdef _DEBUG
 #include <cassert>
 #include <vector>

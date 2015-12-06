@@ -9,7 +9,6 @@ namespace enumerator {
 		null_(const I& i)
 			: I(i)
 		{ }
-		// operator==() ???
 		operator bool() const
 		{
 			return I::operator*() != 0;
@@ -29,6 +28,18 @@ namespace enumerator {
 
 			return _null;
 		}
+		null_& operator+=(typename I::difference_type n)
+		{
+			I::operator+=(n);
+
+			return *this;
+		}
+		null_& operator-=(typename I::difference_type n)
+		{
+			I::operator-=(n);
+
+			return *this;
+		}
 	};
 	template<class I>
 	inline auto null(const I& i)
@@ -43,7 +54,21 @@ namespace enumerator {
 	}
 
 } // enumerator
-
+template<class I>
+inline auto operator+(const enumerator::null_<I>& e, typename I::difference_type n)
+{
+	return enumerator::null_<I>(e) += n;
+}
+template<class I>
+inline auto operator+(typename I::difference_type n, const enumerator::null_<I>& e)
+{
+	return operator+(e, n);
+}
+template<class I>
+inline auto operator-(const enumerator::null_<I>& e, typename I::difference_type n)
+{
+	return enumerator::null_<I>(e) -= n;
+}
 #ifdef _DEBUG
 #include <cassert>
 #include "ptr_.h"
@@ -58,6 +83,7 @@ inline void test_null_()
 		auto e = null(ptr(i));
 		auto e2(e);
 		e = e2;
+		assert (e == e2);
 		assert (e);
 		assert (*e == i[0]);
 		e++;
@@ -84,6 +110,15 @@ inline void test_null_()
 		++e;
 		e++;
 		assert (!e);
+	}
+	{
+		auto e = null(ptr("bar"));
+		e += 2;
+		assert (*e == 'r');
+		e -= 1;
+		assert (*e == 'a');
+		e = e + 1;
+		assert (*e == 'r');
 	}
 }
 

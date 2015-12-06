@@ -4,10 +4,12 @@
 int main()
 {
 	test_ptr_();
-	test_range_();
 	test_constant_();
-	test_counted_();
 	test_null_();
+	test_counted_();
+	test_range_();
+
+	test_cmp();
 	/*	test_e();
 	test_rotate();
 	test_apply_();
@@ -15,7 +17,6 @@ int main()
 	test_iota_();
 	test_until_();
 
-	test_cmp();
 	test_copy();
 	test_rotate();
 	test_swap();

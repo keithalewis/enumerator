@@ -7,11 +7,9 @@
 namespace enumerator {
 
 	template<class... I>
-	class tuple_ : public std::iterator<std::input_iterator_tag,
-//		std::common_type_t<std::iterator_traits<I...>::category_type>,
-		std::tuple<I...>>
+	class tuple_ 
 	{
-		std::tuple<I...> i;
+		I... i;
 	public:
 		tuple_(I... i)
 			: i(i)

@@ -79,11 +79,7 @@ namespace enumerator {
 template<class T>
 inline auto operator+(const enumerator::counted_<T>& p, typename enumerator::counted_<T>::difference_type n)
 {
-	auto p_(p);
-
-	p_.operator+=(n);
-
-	return p_;
+	return enumerator::counted_<T>(p).operator+=(n);
 }
 template<class T>
 inline auto operator+(typename enumerator::counted_<T>::difference_type n, const enumerator::counted_<T>& p)
@@ -93,11 +89,7 @@ inline auto operator+(typename enumerator::counted_<T>::difference_type n, const
 template<class T>
 inline auto operator-(const enumerator::counted_<T>& p, typename enumerator::counted_<T>::difference_type n)
 {
-	auto p_(p);
-
-	p_.operator-=(n);
-
-	return p_;
+	return enumerator::counted_<T>(p).operator-=(n);
 }
 
 #ifdef _DEBUG
