@@ -24,11 +24,11 @@ namespace enumerator {
 #include "range_.h"
 
 #include "cmp.h"
+#include "rotate.h"
 
 /*
 #include "apply_.h"
 #include "iota_.h"
-x#include "rotate.h"
 #include "until_.h"
 
 #include "copy.h"

@@ -9,10 +9,10 @@ namespace enumerator {
 	template<class... I>
 	class tuple_ 
 	{
-		I... i;
+		std::tuple<I...> i;
 	public:
 		tuple_(I... i)
-			: i(i)
+			: i(std::make_tuple(i...))
 		{ }
 		operator bool() const
 		{

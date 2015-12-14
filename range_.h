@@ -5,41 +5,47 @@ namespace enumerator {
 
 	// enumerator from STL range
 	template<class I>
-	class range_ : public iterator<I> {
-		I b;
+	class range_ : public I {
 		I e;
 	public:
 		range_(const I& b, const I& e)
-			: b(b), e(e)
+			: I(b), e(e)
 		{ }
-		I begin() const
+
+		I& begin()
 		{
-			return b;
+			using namespace std;
+
+			return *this;
 		}
-		I end() const
+		I& end()
+		{
+			return e;
+		}
+		const I& begin() const
+		{
+			return *this;
+		}
+		const I& end() const
 		{
 			return e;
 		}
 		operator bool() const
 		{
-			return b != e;
+			return I::operator!=(e);
 		}
 		bool operator==(const range_<I>& r) const
 		{
-			return b == r.b && e == r.e;
+			return I::operator==(r) && e == r.e;
 		}
 		bool operator!=(const range_<I>& r) const
 		{
 			return !operator==(r);
 		}
-		value_type operator*() const
-		{
-			return *b;
-		}
 		range_& operator++()
 		{
-			if (b != e)
-				++b;
+			if (operator bool())
+				I::operator++();
 
 			return *this;
 		}
@@ -47,19 +53,19 @@ namespace enumerator {
 		{
 			range_ _range(*this);
 
-			operator++();
+			I::operator++();
 
 			return _range;
 		}
-		range_& operator+=(difference_type n)
+		range_& operator+=(typename I::difference_type n)
 		{
-			b += n;
+			I::operator+=(n);
 
 			return *this;
 		}
-		range_& operator-=(difference_type n)
+		range_& operator-=(typename I::difference_type n)
 		{
-			b -= n;
+			I::operator-=(n);
 
 			return *this;
 		}
@@ -70,12 +76,13 @@ namespace enumerator {
 		return range_<I>(b, e);
 	}
 	template<class C>
-	inline auto range(const C& c)
+	inline auto range(/*const*/ C& c)
 	{
 		return range(std::begin(c), std::end(c));
 	}
 
 } // enumerator
+
 template<class I>
 inline auto operator+(const enumerator::range_<I>& e, typename enumerator::range_<I>::difference_type n)
 {
@@ -147,6 +154,17 @@ inline void test_range_()
 			s += t;
 		}
 		assert (s == 3);
+	}
+	{
+		std::vector<int> v{0,1,2};
+		auto r = range(v);
+		assert (r.begin() == v.begin());
+		assert (r.end() == v.end());
+		r += 2;
+		assert (r.begin() == v.begin() + 2);
+		assert (r.end() == v.end());
+		r = r + 1;
+		assert (r.begin() == v.end());
 	}
 }
 

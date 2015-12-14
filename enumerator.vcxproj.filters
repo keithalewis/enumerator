@@ -37,9 +37,6 @@
     <ClInclude Include="swap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="end_.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="iota_.h">
       <Filter>Header Files</Filter>
     </ClInclude>

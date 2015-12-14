@@ -17,14 +17,16 @@ namespace enumerator {
 #include <cstring>
 #include <vector>
 #include "null_.h"
+#include "ptr_.h"
 
 inline void test_copy()
 {
 	using enumerator::copy;
 	using enumerator::null;
+	using enumerator::ptr;
 
 	char bar[3];
-	copy(null("foo"), bar);
+	copy(null(ptr("foo")), bar);
 	assert (0 == strncmp("foo", bar, 3));
 }
 

@@ -7,12 +7,55 @@ namespace enumerator {
 	template<class E>
 	inline void rotate(E b, E m)
 	{
+		using std::swap;
+		using std::iter_swap;
+
 		if (!b || !m || b == m)
 			return;
 
 		E n = m;
 		while (b != n) {
-			std::iter_swap(b++, n++);
+			auto t = *b;
+			*n = *b;
+			*b = t;
+			++b;
+			++n;
+			if (!n)
+				n = m;
+			else if (b == m)
+				m = n;
+		}
+	}
+	template<class E>
+	inline void rotate_iter_swap(E b, E m)
+	{
+		if (!b || !m || b == m)
+			return;
+
+		E n = m;
+		while (b != n) {
+//			iter_swap(b++, n++);
+			iter_swap(b, n);
+			++b;
+			++n;
+			if (!n)
+				n = m;
+			else if (b == m)
+				m = n;
+		}
+	}
+	template<class E>
+	inline void rotate_swap(E b, E m)
+	{
+		if (!b || !m || b == m)
+			return;
+
+		E n = m;
+		while (b != n) {
+//			std::swap(*b++, *n++);
+			std::swap(*b, *n);
+			++b;
+			++n;
 			if (!n)
 				n = m;
 			else if (b == m)
@@ -28,46 +71,59 @@ namespace enumerator {
 #include <algorithm>
 #include <iostream>
 #include "timer.h"
-#include "copy.h"
-#include "counted_.h"
-#include "end_.h"
-#include "iota_.h"
-#include "null_.h"
+#include "range_.h"
+
+// http://en.cppreference.com/w/cpp/algorithm/rotatetemplate 
+template<class ForwardIt>
+inline void rotate(ForwardIt first, ForwardIt n_first, ForwardIt last)
+{
+	ForwardIt next = n_first;
+	while (first != next) {
+		std::iter_swap(first++, next++);
+		if (next == last) {
+			next = n_first;
+		} else if (first == n_first) {
+			n_first = next;
+		}
+	}
+}
 
 inline void test_rotate()
 {
 	using namespace enumerator;
 
-	char s[6], t[6];
-	for (int i = 1; i < 6; ++i) {
-		for (int j = 0; j < i; ++j) {
-			copy(counted(iota('a'), i), s);
-			copy(counted(iota('a'), i), t);
+	timer::clock<> c;
 
-			rotate(counted(s, i), counted(s + j, i - j));
-			std::rotate(t, t + j, t + i);
+	std::vector<int> i(1'000);
 
-			assert (std::equal(s, s + 5, t));
-		}
-	}
+	c.start();
+	for (size_t m = 0; m < i.size(); ++m)
+		::rotate(i.begin(), i.begin() + m, i.end());
+	c.stop();
+	auto milli = c.count();
 
-	std::vector<int> i(1'000'000);
-	auto r = [&i](size_t m) {
-		return [&i,m]() { 
-			std::rotate(i.begin(), i.begin() + m, i.end()); 
-		};
-	};
-	auto n = timer::time(r(1000), 1);
-	std::cout << n << std::endl;
+	std::cout << milli << '\n';
 
-	auto ie = enumerator::end(i);
-	auto re = [&i](size_t m) {
-		return [&i,m]() { 
-			enumerator::rotate(i.begin(), i.begin() + m); 
-		};
-	};
-	n = timer::time(re(1000), 1);
-	std::cout << n << std::endl;
+	auto e = range(i);
+	c.start();
+	for (ptrdiff_t m = 0; static_cast<size_t>(m) < i.size(); ++m)
+		enumerator::rotate(e, e + m);
+	c.stop();
+	milli = c.count();
+	std::cout << milli << '\n';
+
+	c.start();
+	for (ptrdiff_t m = 0; static_cast<size_t>(m) < i.size(); ++m)
+		enumerator::rotate_iter_swap(e, e + m);
+	c.stop();
+	milli = c.count();
+	std::cout << milli << '\n';
+	c.start();
+	for (ptrdiff_t m = 0; static_cast<size_t>(m) < i.size(); ++m)
+		enumerator::rotate_swap(e, e + m);
+	c.stop();
+	milli = c.count();
+	std::cout << milli << '\n';
 }
 
 #endif // _DEBUG

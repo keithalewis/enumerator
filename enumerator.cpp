@@ -10,8 +10,8 @@ int main()
 	test_range_();
 
 	test_cmp();
-	/*	test_e();
 	test_rotate();
+	/*	test_e();
 	test_apply_();
 	test_end_();
 	test_iota_();
