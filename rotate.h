@@ -7,9 +7,6 @@ namespace enumerator {
 	template<class E>
 	inline void rotate(E b, E m)
 	{
-		using std::swap;
-		using std::iter_swap;
-
 		if (!b || !m || b == m)
 			return;
 
