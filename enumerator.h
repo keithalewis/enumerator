@@ -100,7 +100,7 @@ namespace enumerator {
 		}
 	};
 
-	template<class E>
+	template<class E> // is_floating_point<decltype(*E)>
 	class epsilon {
 		E e;
 	public:
