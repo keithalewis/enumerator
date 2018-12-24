@@ -1,1 +1,4 @@
-CXXFLAGS += -I.. -Wall --std=c++14 -D_DEBUG -g
+all:
+	rm -rf build
+	mkdir build
+	(cd build; cmake ..; make && ctest)
